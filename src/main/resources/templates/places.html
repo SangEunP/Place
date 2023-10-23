@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <meta charset="UTF-8">
+    <title>Discover Helsinki</title>
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+</head>
+
+<body>
+<div class="container">
+    <div class="col-md-4">
+        <h1>Discover Helsinki</h1>
+    </div>
+
+    <div style="padding:0 20px">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Location</th>
+                    <th>Price Level</th>
+                    <th>Category</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="place : ${places}">
+                    <td th:text="${place.name}"></td>
+                    <td th:text="${place.location}"></td>
+                    <td th:text="${place.priceLevel}"></td>
+                    <td th:text="${place.category.name}"></td>
+                    <td>
+                        <a th:href="@{/places/delete/{id}(id=${place.id})}" class="btn btn-danger btn-sm">Delete</a>
+                        <a th:href="@{/editplace/{id}(id=${place.id})}" class="btn btn-primary btn-sm">Edit</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <a href="/addplace" class="btn btn-primary">Add place</a>
+    </div>
+</div>
+</body>
+</html>
