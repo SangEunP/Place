@@ -20,6 +20,8 @@
                     <th>Location</th>
                     <th>Price Level</th>
                     <th>Category</th>
+                    <th>Actions</th>
+                    <th>Review</th>
                 </tr>
             </thead>
             <tbody>
@@ -32,11 +34,34 @@
                         <a th:href="@{/places/delete/{id}(id=${place.id})}" class="btn btn-danger btn-sm">Delete</a>
                         <a th:href="@{/editplace/{id}(id=${place.id})}" class="btn btn-primary btn-sm">Edit</a>
                     </td>
+                    <td>
+                        <button class="btn btn-success btn-sm" th:attr="onclick='incrementGoodClickCount(\'' + ${place.id} + '\')'">Good</button>
+						<button class="btn btn-danger btn-sm" th:attr="onclick='decrementGoodClickCount(\'' + ${place.id} + '\')'">Bad</button>
+						<span th:id="'goodCount_' + ${place.id}">0</span>
+                    </td>
                 </tr>
             </tbody>
         </table>
         <a href="/addplace" class="btn btn-primary">Add place</a>
     </div>
 </div>
+
+<script>
+    function incrementGoodClickCount(placeId) {
+        var countElement = document.getElementById('goodCount_' + placeId);
+        var currentCount = parseInt(countElement.innerHTML);
+        currentCount++;
+        countElement.innerHTML = currentCount;
+    }
+
+    function decrementGoodClickCount(placeId) {
+        var countElement = document.getElementById('goodCount_' + placeId);
+        var currentCount = parseInt(countElement.innerHTML);
+        currentCount--;
+        countElement.innerHTML = currentCount;
+    }
+</script>
+
 </body>
 </html>
+

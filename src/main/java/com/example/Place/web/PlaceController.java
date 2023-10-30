@@ -1,7 +1,6 @@
 package com.example.Place.web;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +9,7 @@ import com.example.Place.domain.Category;
 import com.example.Place.domain.CategoryRepository;
 import com.example.Place.domain.Place;
 import com.example.Place.domain.PlaceRepository;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 @Controller
 public class PlaceController {
@@ -33,7 +33,8 @@ public class PlaceController {
         return "places";
     }
 
-    // Delete
+    // Delete - Only accessible by users with "ADMIN" role
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/places/delete/{id}")
     public String deletePlace(@PathVariable("id") Long placeId, Model model) {
         placeRepository.deleteById(placeId);
