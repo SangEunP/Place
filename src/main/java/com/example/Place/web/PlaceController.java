@@ -2,6 +2,7 @@ package com.example.Place.web;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -9,7 +10,6 @@ import com.example.Place.domain.Category;
 import com.example.Place.domain.CategoryRepository;
 import com.example.Place.domain.Place;
 import com.example.Place.domain.PlaceRepository;
-import org.springframework.security.access.prepost.PreAuthorize;
 
 @Controller
 public class PlaceController {
